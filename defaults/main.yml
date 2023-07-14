@@ -1,0 +1,18 @@
+# FQDN to be put into /etc/hostname and set as hostname, identifies logging machine in logs
+remote_logging_hostname: "{{ inventory_hostname }}"
+
+# flag for logging into remote server
+remote_logging_enabled: true
+
+# name of remote server
+remote_logging_server: vinovago.cesnet.cz
+
+# TCP port of remote server
+remote_logging_port: 514
+
+# config file and destination name
+remote_logging_conf: vinovago
+
+# TLS settings
+remote_logging_client_key_file: /etc/perun/ssl/hostkey.pem
+remote_logging_client_cert_file: /etc/perun/ssl/hostcert.pem

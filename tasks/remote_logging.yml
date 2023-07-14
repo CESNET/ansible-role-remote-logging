@@ -1,0 +1,43 @@
+- name: "set hostname"
+  hostname:
+    name: "{{ remote_logging_hostname }}"
+
+- name: "set /etc/hostname"
+  copy:
+    dest: /etc/hostname
+    content: "{{ remote_logging_hostname }}"
+
+- name: "install ca-certificates"
+  apt:
+    name: ca-certificates
+    state: present
+
+- name: "install syslog-ng"
+  apt:
+    name: syslog-ng
+    state: present
+
+- name: "create {{ remote_logging_conf }}.conf for syslog-ng"
+  when: remote_logging_enabled
+  template:
+    src: remote_logging.j2
+    dest: "/etc/syslog-ng/conf.d/{{ remote_logging_conf }}.conf"
+  notify: "restart syslog-ng"
+
+- name: "remove {{ remote_logging_conf }}.conf"
+  when: not remote_logging_enabled
+  file:
+    path: "/etc/syslog-ng/conf.d/{{ remote_logging_conf }}.conf"
+    state: absent
+  notify: "restart syslog-ng"
+
+- name: "set FQDN in syslog"
+  lineinfile:
+    path: /etc/syslog-ng/syslog-ng.conf
+    regexp: '^options { (.*) use_fqdn\((\w)+\);$'
+    line: 'options { \1 use_fqdn(yes);'
+    backrefs: yes
+  notify: "restart syslog-ng"
+
+- name: "flush handlers"
+  meta: flush_handlers

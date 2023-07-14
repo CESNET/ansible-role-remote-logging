@@ -1,0 +1,19 @@
+# Configure the remote destination
+# see https://www.syslog-ng.com/technical-documents/doc/syslog-ng-open-source-edition/3.25/administration-guide/tls-encrypted-message-transfer/tls-options/
+destination d_{{ remote_logging_conf }} {
+    network(
+        "{{ remote_logging_server }}"
+        port({{ remote_logging_port }})
+        transport("tls")
+        tls(
+            key_file("{{ remote_logging_client_key_file }}")
+            cert_file("{{ remote_logging_client_cert_file }}")
+            ca_dir("/etc/ssl/certs")
+            trusted-dn("CN={{ remote_logging_server }}, *")
+        )
+        flush_lines(100)
+    );
+};
+
+# Define log channel, no filtering
+log { source(s_src); destination(d_{{ remote_logging_conf }}); };
