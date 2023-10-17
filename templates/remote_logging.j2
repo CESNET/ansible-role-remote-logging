@@ -18,4 +18,4 @@ destination d_{{ remote_logging_conf }} {
 };
 
 # Define log channel, no filtering
-log { source(s_src); destination(d_{{ remote_logging_conf }}); };
+log { source(s_src); {{ remote_logging_filter }} destination(d_{{ remote_logging_conf }}); };

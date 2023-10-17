@@ -13,6 +13,10 @@ remote_logging_port: 514
 # config file and destination name
 remote_logging_conf: vinovago
 
+# filtering rule must return true for messages to be sent to remote logging
+# eg.: filter { match("perun_audit" value(".journald.SYSLOG_IDENTIFIER")) };
+remote_logging_filter: ""
+
 # TLS settings
 remote_logging_client_key_file: /etc/perun/ssl/hostkey.pem
 remote_logging_client_cert_file: /etc/perun/ssl/hostcert.pem
