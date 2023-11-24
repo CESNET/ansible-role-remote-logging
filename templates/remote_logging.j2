@@ -1,5 +1,5 @@
 # Configure the remote destination
-# see https://www.syslog-ng.com/technical-documents/doc/syslog-ng-open-source-edition/3.25/administration-guide/tls-encrypted-message-transfer/tls-options/
+# see https://www.syslog-ng.com/technical-documents/doc/syslog-ng-open-source-edition/3.38/administration-guide/tls-encrypted-message-transfer/tls-options/
 destination d_{{ remote_logging_conf }} {
     network(
         "{{ remote_logging_server }}"
@@ -14,6 +14,9 @@ destination d_{{ remote_logging_conf }} {
         flush_lines(100)
         # workaround for Java exceptions containing multiple lines
         flags(no-multi-line)
+        # send timestamp in ISO format with timezone and microseconds precision
+        template("$ISODATE $HOST $MSGHDR$MSG\n")
+        frac-digits(6)
     );
 };
 

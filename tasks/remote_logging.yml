@@ -39,5 +39,13 @@
     backrefs: yes
   notify: "restart syslog-ng"
 
+- name: "comment out writing /var/log/debug"
+  lineinfile:
+    path: /etc/syslog-ng/syslog-ng.conf
+    regexp: 'log { source\(s_src\); filter\(f_debug\); destination\(d_debug\); };'
+    line: '#log { source(s_src); filter(f_debug); destination(d_debug); };'
+    backrefs: yes
+  notify: "restart syslog-ng"
+
 - name: "flush handlers"
   meta: flush_handlers
