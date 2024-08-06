@@ -7,6 +7,9 @@ remote_logging_enabled: true
 # name of remote server
 remote_logging_server: vinovago.cesnet.cz
 
+# mechanism used for remote logging
+remote_logging_protocol: network
+
 # TCP port of remote server
 remote_logging_port: 514
 
