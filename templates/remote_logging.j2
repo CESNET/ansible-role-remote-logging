@@ -1,7 +1,7 @@
 # Configure the remote destination
 # see https://www.syslog-ng.com/technical-documents/doc/syslog-ng-open-source-edition/3.38/administration-guide/tls-encrypted-message-transfer/tls-options/
 destination d_{{ remote_logging_conf }} {
-    network(
+    {{ remote_logging_protocol }}(
         "{{ remote_logging_server }}"
         port({{ remote_logging_port }})
         transport("tls")
@@ -11,6 +11,17 @@ destination d_{{ remote_logging_conf }} {
             ca_dir("/etc/ssl/certs")
             trusted-dn("CN={{ remote_logging_server }}, *")
         )
+{% if remote_logging_protocol == 'syslog' %}
+        ip-protocol(6)
+        flags(syslog-protocol)
+{% endif %}
+{% if remote_logging_enable_disk_buffer %}
+        disk-buffer(
+            mem-buf-size({{ remote_logging_disk_buffer_size_mem }})
+            disk-buf-size({{ remote_logging_disk_buffer_size }})
+            reliable({{ remote_logging_disk_buffer_reliable }})
+	    )
+{% endif %}
         flush_lines(100)
         # workaround for Java exceptions containing multiple lines
         flags(no-multi-line)
