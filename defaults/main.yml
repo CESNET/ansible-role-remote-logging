@@ -23,3 +23,13 @@ remote_logging_filter: ""
 # TLS settings
 remote_logging_client_key_file: /etc/perun/ssl/hostkey.pem
 remote_logging_client_cert_file: /etc/perun/ssl/hostcert.pem
+
+# Disk buffer prevents data loss if destination log server is temporarily not available
+remote_logging_disk_buffer: no
+# is reliable=yes, all messages are written to the disk first
+remote_logging_disk_buffer_reliable: 'yes'
+# size in bytes for the disk buffer, default is minimum 1048576 bytes (1 MiB), we use 5GB
+remote_logging_disk_buffer_size: 5000000000
+# size of the messages in bytes that is used in the memory part of the disk buffer (cca 163 MB)
+remote_logging_disk_buffer_size_mem: 163840000
+
