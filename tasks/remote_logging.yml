@@ -20,7 +20,7 @@
 - name: "create {{ remote_logging_conf }}.conf for syslog-ng"
   when: remote_logging_enabled
   template:
-    src: remote_logging.j2
+    src: "{{ remote_logging_template }}"
     dest: "/etc/syslog-ng/conf.d/{{ remote_logging_conf }}.conf"
   notify: "restart syslog-ng"
 
