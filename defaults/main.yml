@@ -33,3 +33,5 @@ remote_logging_disk_buffer_size: 5000000000
 # size of the messages in bytes that is used in the memory part of the disk buffer (cca 163 MB)
 remote_logging_disk_buffer_size_mem: 163840000
 
+# path to template file used for remote logging config
+remote_logging_template: remote_logging.j2
