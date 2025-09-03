@@ -39,6 +39,14 @@
     backrefs: yes
   notify: "restart syslog-ng"
 
+# stats_freq(0) has changed to stats(freq(1)) in Debian 13, resulting in excess statistics in Graylog
+- name: "set expected stats_freq in the syslog-ng.conf"
+  ansible.builtin.replace:
+    path: /etc/syslog-ng/syslog-ng.conf
+    regexp: 'stats\(freq\(1\)\)'
+    replace: 'stats(freq(0))'
+  notify: "restart syslog-ng"
+
 - name: "comment out writing some /var/log/ files"
   lineinfile:
     path: /etc/syslog-ng/syslog-ng.conf
