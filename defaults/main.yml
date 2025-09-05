@@ -7,6 +7,9 @@ remote_logging_enabled: true
 # name of remote server
 remote_logging_server: syslog.cesnet.cz
 
+# IP version to use when connecting to the remote server (4 or 6)
+remote_logging_server_ip_version: 6
+
 # mechanism used for remote logging
 remote_logging_protocol: syslog
 

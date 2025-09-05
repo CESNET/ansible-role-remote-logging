@@ -12,7 +12,7 @@ destination d_{{ remote_logging_conf }} {
             trusted-dn("CN={{ remote_logging_server }}, *")
         )
 {% if remote_logging_protocol == 'syslog' %}
-        ip-protocol(6)
+        ip-protocol({{ remote_logging_server_ip_version }})
         flags(syslog-protocol)
 {% endif %}
 {% if remote_logging_enable_disk_buffer %}
