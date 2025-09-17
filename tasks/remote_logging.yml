@@ -31,6 +31,14 @@
     state: absent
   notify: "restart syslog-ng"
 
+- name: Put additional remote logging configurations
+  when: remote_logging_enabled and remote_logging_extra_templates
+  with_items: "{{ remote_logging_extra_templates }}"
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/etc/syslog-ng/conf.d/{{ item }}.conf"
+  notify: "restart syslog-ng"
+
 - name: "set FQDN in syslog"
   lineinfile:
     path: /etc/syslog-ng/syslog-ng.conf

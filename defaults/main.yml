@@ -38,3 +38,5 @@ remote_logging_disk_buffer_size_mem: 163840000
 
 # path to template file used for remote logging config
 remote_logging_template: remote_logging.j2
+
+remote_logging_extra_templates: [] # without .j2 suffix!

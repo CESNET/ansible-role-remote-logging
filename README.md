@@ -9,3 +9,8 @@ The default values of variables match settings for CESNET's central server, conn
 To connect to the logging server over IPv4, set:
 
 `remote_logging_server_ip_version: 4`
+
+You can configure extra templates by setting `remote_logging_extra_templates` variable, without .j2 suffix.
+Pre-defined templates:
+
+- `postgresql_json` configures PostgreSQL JSON log forwarding from `/var/log/postgresql/postgresql*.json`
