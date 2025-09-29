@@ -1,6 +1,6 @@
 source s_postgresql_json {
      wildcard-file(
-        base-dir("/var/log/postgresql/") filename-pattern("postgresql*.json") follow-freq(120)
+        base-dir("/var/log/postgresql/") filename-pattern("postgresql*.json")
         program_override("postgresql_json") flags(no-parse));
 };
 
