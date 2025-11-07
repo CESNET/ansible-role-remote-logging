@@ -14,3 +14,5 @@ You can configure extra templates by setting `remote_logging_extra_templates` va
 Pre-defined templates:
 
 - `postgresql_json` configures PostgreSQL JSON log forwarding from `/var/log/postgresql/postgresql*.json`
+- `nginx_plain` configures NGINX error and access logs in the _plain_ format from `/var/log/nginx/(access|error).log`
+- `nginx_json` configures NGINX error and access logs in the _JSON_ format from `/var/log/nginx/(access.json|error.log)`

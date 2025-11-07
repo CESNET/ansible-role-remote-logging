@@ -1,0 +1,4 @@
+# https://wiki.cesnet.cz/doku.php?id=interni_sluzby:clm#nginx_logy
+source s_nginx_access_json { file("/var/log/nginx/access.json" program_override("nginx_json") flags(no-parse)); };
+source s_nginx_e { file("/var/log/nginx/error.log" program-override("nginx_web_http_error")); };
+log { source(s_nginx_access_json); source(s_nginx_e); destination(d_{{ remote_logging_conf }}); };
