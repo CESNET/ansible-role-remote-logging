@@ -5,5 +5,5 @@ source s_postgresql_json {
 };
 
 log {
-    source(s_postgresql_json); destination(d_{{ remote_logging_conf }});
+    source(s_postgresql_json); destination(d_{{ remote_logging_conf }}_no_custom_template);
 };

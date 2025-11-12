@@ -1,0 +1,32 @@
+# Destination without customizing the template() parameters, ensures standard processing at Graylog for *_json application names.
+# Configure the remote destination
+# see https://www.syslog-ng.com/technical-documents/doc/syslog-ng-open-source-edition/3.38/administration-guide/tls-encrypted-message-transfer/tls-options/
+destination d_{{ remote_logging_conf }}_no_custom_template {
+    {{ remote_logging_protocol }}(
+        "{{ remote_logging_server }}"
+        persist-name("{{ remote_logging_server }}-no_custom_template")
+        port({{ remote_logging_port }})
+        transport("tls")
+        tls(
+            key_file("{{ remote_logging_client_key_file }}")
+            cert_file("{{ remote_logging_client_cert_file }}")
+            ca_dir("/etc/ssl/certs")
+            trusted-dn("CN={{ remote_logging_server }}, *")
+        )
+{% if remote_logging_protocol == 'syslog' %}
+        ip-protocol({{ remote_logging_server_ip_version }})
+        flags(syslog-protocol)
+{% endif %}
+{% if remote_logging_enable_disk_buffer %}
+        disk-buffer(
+            mem-buf-size({{ remote_logging_disk_buffer_size_mem }})
+            disk-buf-size({{ remote_logging_disk_buffer_size }})
+            reliable({{ remote_logging_disk_buffer_reliable }})
+	    )
+{% endif %}
+        flush_lines(100)
+        # workaround for Java exceptions containing multiple lines
+        flags(no-multi-line)
+        frac-digits(6)
+    );
+};

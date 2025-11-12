@@ -2,5 +2,5 @@
 source s_nginx_a { file("/var/log/nginx/access.log" program-override("nginx_web_http_access")); };
 source s_nginx_e { file("/var/log/nginx/error.log" program-override("nginx_web_http_error")); };
 
-log { source(s_nginx_a); destination(d_{{ remote_logging_conf }}); };
-log { source(s_nginx_e); destination(d_{{ remote_logging_conf }}); };
+log { source(s_nginx_a); destination(d_{{ remote_logging_conf }}_no_custom_template); };
+log { source(s_nginx_e); destination(d_{{ remote_logging_conf }}_no_custom_template); };
