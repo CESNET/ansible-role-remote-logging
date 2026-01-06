@@ -1,4 +1,5 @@
 - name: "restart syslog-ng"
   service:
+    enabled: true
     name: syslog-ng
     state: restarted
