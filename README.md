@@ -14,7 +14,8 @@ You can configure extra templates by setting `remote_logging_extra_templates` va
 Pre-defined templates:
 
 - `remote_logging_no_custom_template` Log to the destination without custom template()
---- **required** for _json templates below.
+--- **required** for auditd and _json templates below.
+- `auditd` configures sending Linux audit logs from `/var/log/audit/audit.log`
 - `postgresql_json` configures PostgreSQL JSON log forwarding from `/var/log/postgresql/postgresql*.json`
 - `nginx_plain` configures NGINX error and access logs in the _plain_ format from `/var/log/nginx/(access|error).log`
 - `nginx_json` configures NGINX error and access logs in the _JSON_ format from `/var/log/nginx/(access.json|error.log)``
