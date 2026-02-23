@@ -1,0 +1,3 @@
+source s_audit_plain { file("/var/log/audit/audit.log" program-override("auditd")); };
+
+log { source(s_audit_plain); destination(d_{{ remote_logging_conf }}_no_custom_template); };
