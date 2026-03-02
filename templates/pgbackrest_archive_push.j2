@@ -1,0 +1,3 @@
+source s_pgbackrest_archive_push_plain { file("/var/log/pgbackrest/*-archive-push*.log" program-override("pgbackrest_archive_push")); };
+
+log { source(s_pgbackrest_archive_push_plain); destination(d_{{ remote_logging_conf }}_no_custom_template); };

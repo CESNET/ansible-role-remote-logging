@@ -18,4 +18,5 @@ Pre-defined templates:
 - `auditd` configures sending Linux audit logs from `/var/log/audit/audit.log`
 - `postgresql_json` configures PostgreSQL JSON log forwarding from `/var/log/postgresql/postgresql*.json`
 - `nginx_plain` configures NGINX error and access logs in the _plain_ format from `/var/log/nginx/(access|error).log`
-- `nginx_json` configures NGINX error and access logs in the _JSON_ format from `/var/log/nginx/(access.json|error.log)``
+- `nginx_json` configures NGINX error and access logs in the _JSON_ format from `/var/log/nginx/(access.json|error.log)`
+- `pgbackrest_archive_push` configures sending logs of pgBackRest archive push from `/var/log/pgbackrest/*-archive-push*.log`
