@@ -31,8 +31,8 @@
     state: absent
   notify: "restart syslog-ng"
 
-- name: Put additional remote logging configurations
-  when: remote_logging_enabled and (remote_logging_extra_templates | length > 0)
+- name: Put additional logging configurations
+  when: remote_logging_extra_templates | length > 0
   with_items: "{{ remote_logging_extra_templates }}"
   ansible.builtin.template:
     src: "{{ item }}.j2"
