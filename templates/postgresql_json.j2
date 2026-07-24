@@ -4,6 +4,15 @@ source s_postgresql_json {
         program_override("postgresql_json") flags(no-parse));
 };
 
+parser set_timestamp_from_postgresql_jsonlog {
+       date-parser(
+              format('%Y-%m-%d %T.%f %Z', '%Y-%m-%d %T.%f %Z"')
+              template("$(substr ${MESSAGE} 14 28)")
+       );
+};
+
 log {
-    source(s_postgresql_json); destination(d_{{ remote_logging_conf }}_no_custom_template);
+    source(s_postgresql_json);
+    parser(set_timestamp_from_postgresql_jsonlog);
+    destination(d_{{ remote_logging_conf }}_no_custom_template);
 };
