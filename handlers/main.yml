@@ -1,3 +1,9 @@
+- name: verify configuration of syslog-ng
+  ansible.builtin.command:
+    cmd: syslog-ng -s
+  changed_when: false
+  listen: restart syslog-ng
+
 - name: "restart syslog-ng"
   service:
     enabled: true
