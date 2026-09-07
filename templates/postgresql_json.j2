@@ -14,5 +14,5 @@ parser set_timestamp_from_postgresql_jsonlog {
 log {
     source(s_postgresql_json);
     parser(set_timestamp_from_postgresql_jsonlog);
-    destination(d_{{ remote_logging_conf }}_no_custom_template);
+    destination(d_{{ remote_logging_conf }});
 };
