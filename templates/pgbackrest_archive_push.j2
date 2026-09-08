@@ -1,3 +1,9 @@
-source s_pgbackrest_archive_push_plain { file("/var/log/pgbackrest/*-archive-push*.log" program-override("pgbackrest_archive_push")); };
+source s_pgbackrest_archive_push_plain {
+  wildcard-file(
+    base-dir("/var/log/pgbackrest/")
+    filename-pattern("*-archive-push*.log")
+    program-override("pgbackrest_archive_push")
+  );
+};
 
 log { source(s_pgbackrest_archive_push_plain); destination(d_{{ remote_logging_conf }}); };
