@@ -3,9 +3,11 @@
     cmd: syslog-ng -s
   changed_when: false
   listen: restart syslog-ng
+  when: ansible_facts.services['syslog-ng'] is defined
 
 - name: "restart syslog-ng"
   service:
     enabled: true
     name: syslog-ng
     state: restarted
+  when: ansible_facts.services['syslog-ng'] is defined
